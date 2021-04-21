@@ -24,5 +24,4 @@ public class DoctorOrganization extends Organization{
         roles.add(new DoctorRole());
         return roles;
     }
-     
 }

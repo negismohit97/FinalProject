@@ -4,7 +4,11 @@
  */
 package Business.Organization;
 
+import Business.Account.AccountDirectory;
 import Business.Employee.EmployeeDirectory;
+import Business.Person.DonorDirectory;
+import Business.Person.RecipientDirectory;
+import Business.Person.VisitorDirectory;
 import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
 import Business.WorkQueue.WorkQueue;
@@ -16,15 +20,43 @@ import java.util.ArrayList;
  */
 public abstract class Organization {
 
-    private String name;
+  private String name;
     private WorkQueue workQueue;
     private EmployeeDirectory employeeDirectory;
-    private UserAccountDirectory userAccountDirectory;
+    private AccountDirectory accountDirectory;
+    public abstract ArrayList<Role> getSupportedRole();
+    private DonorDirectory donorDirectory;
+    private RecipientDirectory recipientDirectory;
+    private VisitorDirectory vd;
     private int organizationID;
-    private static int counter=0;
+    private static int counter = 1;
+
+    public AccountDirectory getAccountDirectory() {
+        return accountDirectory;
+    }
+
+    public void setAccountDirectory(AccountDirectory accountDirectory) {
+        this.accountDirectory = accountDirectory;
+    }
+
+    public VisitorDirectory getVd() {
+        return vd;
+    }
+
+    public void setVd(VisitorDirectory vd) {
+        this.vd = vd;
+    }
+
+    public static int getCounter() {
+        return counter;
+    }
+
+    public static void setCounter(int counter) {
+        Organization.counter = counter;
+    }
     
     public enum Type{
-        Admin("Admin Organization"), Doctor("Doctor Organization"), Lab("Lab Organization");
+        Doctor("Doctor Organization"), Lab("Lab Organization"), Visitor("Visitor Organization"),Screening("Screening Organization"),Radiology("Radiology Organization"),NGO("NGO Organization");
         private String value;
         private Type(String value) {
             this.value = value;
@@ -36,17 +68,17 @@ public abstract class Organization {
 
     public Organization(String name) {
         this.name = name;
-        workQueue = new WorkQueue();
-        employeeDirectory = new EmployeeDirectory();
-        userAccountDirectory = new UserAccountDirectory();
-        organizationID = counter;
+        this.workQueue = new WorkQueue();
+        this.employeeDirectory = new EmployeeDirectory();
+        this.accountDirectory = new AccountDirectory();
+        this.donorDirectory = new DonorDirectory();
+        this.recipientDirectory = new RecipientDirectory();
+        this.organizationID = counter;
         ++counter;
     }
-
-    public abstract ArrayList<Role> getSupportedRole();
     
-    public UserAccountDirectory getUserAccountDirectory() {
-        return userAccountDirectory;
+    public AccountDirectory getUserAccountDirectory() {
+        return accountDirectory;
     }
 
     public int getOrganizationID() {
@@ -55,6 +87,14 @@ public abstract class Organization {
 
     public EmployeeDirectory getEmployeeDirectory() {
         return employeeDirectory;
+    }
+    
+    public DonorDirectory getDonorDirectory() {
+        return donorDirectory;
+    }
+    
+    public RecipientDirectory getRecipientDirectory(){
+        return recipientDirectory;
     }
     
     public String getName() {

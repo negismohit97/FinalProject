@@ -5,10 +5,19 @@
  */
 package Business.Enterprise;
 
+import Business.Role.Role;
+import java.util.ArrayList;
+
 /**
  *
  * @author negis
  */
 public class AwarenessCampEnterprise {
-    
+      public AwarenessCampEnterprise(String name) {
+        super(name, Enterprise.EnterpriseType.Awareness);
+    }
+    @Override
+    public ArrayList<Role> getSupportedRole() {
+        return null;
+    }
 }

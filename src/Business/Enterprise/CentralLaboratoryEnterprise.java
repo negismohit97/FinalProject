@@ -5,10 +5,21 @@
  */
 package Business.Enterprise;
 
+import Business.Role.Role;
+import java.util.ArrayList;
+
 /**
  *
  * @author negis
  */
 public class CentralLaboratoryEnterprise {
     
+    public CentralLaboratoryEnterprise(String name) {
+        super(name, Enterprise.EnterpriseType.Laboratory);
+    }
+     
+    @Override
+    public ArrayList<Role> getSupportedRole() {
+        return null;
+    }
 }
